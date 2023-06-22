@@ -6,7 +6,7 @@ from .rol import Rol
 class UserManager (BaseUserManager):
     def create_user(self,username,password = None):
         if not username:
-            raise ValueError('Usuario ya existente')
+            raise ValueError('El nombre de usuario ya existe')
         user = self.model(username=username)
         user.password = make_password(password)
         user.save(using=self._db)
@@ -23,8 +23,8 @@ class User(AbstractBaseUser,PermissionsMixin):
     username = models.CharField('Username',max_length=30,unique=True)
     password = models.CharField('Password',max_length=256, blank=True)
     name = models.CharField('Name',max_length=100)
-    email = models.EmailField('Email',max_length=256)
-    rol = models.CharField('Rol', max_length=50)
+    email = models.EmailField('Email',max_length=256, unique=True)
+    rol = models.ForeignKey(Rol, on_delete=models.CASCADE, verbose_name='Rol')
     estado = models.CharField('Estado', max_length=50, default="Activo")
 
     def save(self, *args, **kwargs):

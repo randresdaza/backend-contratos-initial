@@ -7,8 +7,7 @@ class DependenciaSerializer(serializers.ModelSerializer):
         fields = ['id','nombre']
     
     def to_representation(self, obj):
-        dependencia = Dependencia.objects.get(id = obj.id)
         return {
-            'id':dependencia.id,
-            'nombre':dependencia.nombre,
+            'id':obj.id,
+            'nombre':obj.nombre,
         }

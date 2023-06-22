@@ -20,11 +20,16 @@ from django.urls import path
 
 urlpatterns = [
     path('login/',TokenObtainPairView.as_view()),
+    path('refresh/',TokenRefreshView.as_view()),
     path('userCreate/',views.UserCreateView.as_view()),
-    path('users/',views.UserView.as_view(), name='user-list'),
-    path('users/<int:pk>/', views.UserView.as_view(), name='user-detail'),
-    path('rolCreate/',views.RolCreateView.as_view()),
-    path('dependenciaCreate/',views.DependenciaCreateView.as_view()),
-    path('serieCreate/',views.SerieCreateView.as_view()),
-    path('refresh/',TokenRefreshView.as_view())  
+    path('users/',views.UserView.as_view()),
+    path('users/<int:pk>/', views.UserView.as_view()),
+    path('roles/',views.RolView.as_view()),
+    path('roles/<int:pk>/', views.RolView.as_view()),
+    path('dependencias/',views.DependenciaView.as_view()),
+    path('dependencias/<int:pk>/',views.DependenciaView.as_view()),
+    path('series/',views.SerieView.as_view()),
+    path('series/<int:pk>/',views.SerieView.as_view()),
+    path('subSeries/',views.SubSerieView.as_view()),
+    path('subSeries/<int:pk>/', views.SubSerieView.as_view()),
 ]

@@ -7,8 +7,7 @@ class SerieSerializer(serializers.ModelSerializer):
         fields = ['id','nombre']
     
     def to_representation(self, obj):
-        serie = Serie.objects.get(id = obj.id)
         return {
-            'id':serie.id,
-            'nombre':serie.nombre,
+            'id':obj.id,
+            'nombre':obj.nombre,
         }

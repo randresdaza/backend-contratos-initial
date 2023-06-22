@@ -7,8 +7,7 @@ class RolSerializer(serializers.ModelSerializer):
         fields = ['id','nombre']
     
     def to_representation(self, obj):
-        rol = Rol.objects.get(id = obj.id)
         return {
-            'id':rol.id,
-            'nombre':rol.nombre,
+            'id':obj.id,
+            'nombre':obj.nombre,
         }

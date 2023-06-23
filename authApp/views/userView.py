@@ -16,16 +16,26 @@ class UserView(APIView):
         valid_data = token_backend.decode(token, verify=False)
         return valid_data['user_id'] == request.user.id
 
-    def get(self, request, pk=None):
+    def get(self, request, pk=None, username=None):
         if not self.validate_token(request):
             return Response({'detail': 'No está autorizado'}, status=status.HTTP_401_UNAUTHORIZED)
+
         if pk is not None:
             try:
-                user = User.objects.get(pk=pk)
+                user = User.objects.get(id=pk)
                 serializer = UserSerializer(user)
                 return Response(serializer.data)
             except User.DoesNotExist:
                 return Response({'detail': 'El usuario no existe'}, status=status.HTTP_404_NOT_FOUND)
+
+        if username is not None:
+            try:
+                user = User.objects.get(username=username)
+                serializer = UserSerializer(user)
+                return Response(serializer.data)
+            except User.DoesNotExist:
+                return Response({'detail': 'El usuario no existe'}, status=status.HTTP_404_NOT_FOUND)
+
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)

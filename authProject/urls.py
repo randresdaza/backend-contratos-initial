@@ -24,6 +24,7 @@ urlpatterns = [
     path('userCreate/',views.UserCreateView.as_view()),
     path('users/',views.UserView.as_view()),
     path('users/<int:pk>/', views.UserView.as_view()),
+    path('users/username/<str:username>/', views.UserView.as_view()),
     path('roles/',views.RolView.as_view()),
     path('roles/<int:pk>/', views.RolView.as_view()),
     path('dependencias/',views.DependenciaView.as_view()),
